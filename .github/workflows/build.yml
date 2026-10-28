@@ -1,0 +1,33 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build (Release)
+        shell: cmd
+        run: build.cmd Release
+
+      - name: Unit tests
+        shell: cmd
+        run: build\Release\bin\windira-tests.exe
+
+      - name: Package
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory dist | Out-Null
+          Copy-Item build\Release\bin\windira.exe, build\Release\bin\windira-cli.exe, README.md, LICENSE dist\
+          Compress-Archive dist\* windira-x64.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windira-x64
+          path: windira-x64.zip

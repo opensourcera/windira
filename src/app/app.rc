@@ -1,0 +1,69 @@
+#include <winres.h>
+#include "resource.h"
+#include "../common/version.h"
+
+IDI_APP ICON "../../res/windira.ico"
+
+IDD_RENAME_DEVICE DIALOGEX 0, 0, 340, 232
+STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Rename device"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    LTEXT           "Current name:", IDC_STATIC, 10, 10, 60, 9
+    LTEXT           "", IDC_CURRENT, 72, 10, 258, 9, SS_ENDELLIPSIS | SS_NOPREFIX
+    LTEXT           "&New name:", IDC_STATIC, 10, 28, 60, 9
+    EDITTEXT        IDC_NAME, 72, 26, 258, 13, ES_AUTOHSCROLL
+    AUTOCHECKBOX    "Also rename the other parts of this physical device (its microphone, audio function and USB entry)",
+                    IDC_RELATED, 10, 46, 320, 18, BS_MULTILINE
+    AUTOCHECKBOX    "&Restart the device afterwards (it disconnects for a moment)", IDC_RESTART, 10, 66, 320, 10
+    LTEXT           "These names will change:", IDC_STATIC, 10, 84, 200, 9
+    LISTBOX         IDC_CHANGES, 10, 95, 320, 106, LBS_NOINTEGRALHEIGHT | LBS_NOSEL | WS_VSCROLL | WS_HSCROLL | WS_BORDER
+    DEFPUSHBUTTON   "Rename", IDOK, 226, 210, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 280, 210, 50, 14
+END
+
+IDD_RENAME_ENDPOINT DIALOGEX 0, 0, 300, 130
+STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Rename sound device"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    LTEXT           "Current name:", IDC_STATIC, 10, 10, 70, 9
+    LTEXT           "", IDC_CURRENT, 82, 10, 208, 9, SS_ENDELLIPSIS | SS_NOPREFIX
+    LTEXT           "&Description:", IDC_STATIC, 10, 28, 70, 9
+    EDITTEXT        IDC_DESC, 82, 26, 208, 13, ES_AUTOHSCROLL
+    LTEXT           "&Device name:", IDC_STATIC, 10, 46, 70, 9
+    EDITTEXT        IDC_DEVNAME, 82, 44, 208, 13, ES_AUTOHSCROLL
+    LTEXT           "Apps will show:", IDC_STATIC, 10, 68, 70, 9
+    LTEXT           "", IDC_RESULT, 82, 68, 208, 9, SS_ENDELLIPSIS | SS_NOPREFIX
+    LTEXT           "Windows shows sound devices as ""Description (Device name)"", for example ""Microphone (Left camera)"".",
+                    IDC_STATIC, 10, 84, 280, 18
+    DEFPUSHBUTTON   "Rename", IDOK, 186, 108, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 240, 108, 50, 14
+END
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION WINDIRA_VERSION_NUM
+ PRODUCTVERSION WINDIRA_VERSION_NUM
+ FILEFLAGSMASK 0x3fL
+ FILEOS VOS_NT_WINDOWS32
+ FILETYPE VFT_APP
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "opensourcera"
+            VALUE "FileDescription", "Windira - rename devices"
+            VALUE "FileVersion", WINDIRA_VERSION_STR
+            VALUE "InternalName", "windira"
+            VALUE "LegalCopyright", WINDIRA_COPYRIGHT
+            VALUE "OriginalFilename", "windira.exe"
+            VALUE "ProductName", "Windira"
+            VALUE "ProductVersion", WINDIRA_VERSION_STR
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END

@@ -1,0 +1,7 @@
+/build/
+/out/
+/.vs/
+*.user
+*.aps
+CMakeSettings.json
+/dist/
